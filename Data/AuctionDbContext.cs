@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WebAuction.Entityes;
 using WebAuction.Entities;
 
 namespace WebAuction.Data

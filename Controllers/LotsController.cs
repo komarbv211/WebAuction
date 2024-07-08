@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAuction.Data;
+using WebAuction.Entities;
 
 namespace WebAuction.Controllers
 {
@@ -19,15 +20,29 @@ namespace WebAuction.Controllers
 
             return View(products);
         }
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Lot model)
+        {
+            ctx.Lots.Add(model);
+            ctx.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
         public IActionResult Archive()
         {
-            var products = ctx.Lots
+            var lot = ctx.Lots
                 .Include(x => x.Category) 
                 .Where(x => x.Archived)
                 .ToList();
 
-            return View(products);
+            return View(lot);
         }
+
         public IActionResult ArchiveItem(int id)
         {
             var product = ctx.Lots.Find(id);

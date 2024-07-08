@@ -1,6 +1,4 @@
-﻿using WebAuction.Entityes;
-
-namespace WebAuction.Entities
+﻿namespace WebAuction.Entities
 {
     public class Bid
     {

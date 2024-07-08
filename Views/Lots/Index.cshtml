@@ -1,9 +1,12 @@
-﻿@using WebAuction.Entityes
+﻿@using WebAuction.Entities
 @model List<Lot>
 
 <h1>Lot List</h1>
 <p>You can manage lots here.</p>
-
+<a asp-action="Create" class="btn btn-primary mb-2">
+    <i class="bi bi-plus-lg"></i>
+    Create New Lot
+</a>
 <table class="table">
     <thead>
         <tr class="table-dark">
@@ -21,7 +24,7 @@
     <tbody>
         @foreach (var i in Model)
         {
-            <tr>
+            <tr class="align-middle">
                 <th scope="row">@i.Id</th>
                 <td>@i.Name</td>
                 <td>@i.StartPrice$</td>

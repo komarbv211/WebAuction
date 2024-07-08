@@ -1,9 +1,9 @@
-﻿namespace WebAuction.Entityes
+﻿namespace WebAuction.Entities
 {
     public class Category
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<Lot> Lots { get; set; } 
+        public ICollection<Lot>? Lots { get; set; } 
     }
 }

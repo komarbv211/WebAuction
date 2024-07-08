@@ -1,0 +1,62 @@
+﻿@model Lot
+<h1>Create Lot Form</h1>
+
+<form class="row g-3" method="post" asp-action="Create">
+    <div class="col-12">
+        <label asp-for="Name" class="form-label">Name</label>
+        <input asp-for="Name" required type="text" class="form-control" placeholder="Enter lot name">
+    </div>
+    <div class="col-12 mb-3">
+        <label asp-for="Description" class="form-label">Description</label>
+        <textarea asp-for="Description" maxlength="10000" placeholder="Enter lot description" class="form-control" rows="3"></textarea>
+    </div>
+    <div class="col-md-3">
+        <label asp-for="Quantity" class="form-label">Quantity</label>
+        <input asp-for="Quantity" min="0" type="number" class="form-control" placeholder="Enter quantity">
+    </div>
+    <div class="col-md-3">
+        <label asp-for="CategoryId" class="form-label">Category ID</label>
+        <input asp-for="CategoryId" type="number" class="form-control" placeholder="Enter category ID">
+    </div>
+    <div class="col-md-3">
+        <label asp-for="StartPrice" class="form-label">Start Price</label>
+        <div class="input-group">
+            <input asp-for="StartPrice" min="0" step="0.01" type="number" class="form-control" placeholder="Enter start price">
+            <span class="input-group-text">$</span>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <label asp-for="RateStep" class="form-label">Rate Step</label>
+        <input asp-for="RateStep" min="1" type="number" class="form-control" placeholder="Enter rate step">
+    </div>
+    <div class="col-md-3">
+        <label asp-for="EndTime" class="form-label">End Time</label>
+        <input asp-for="EndTime" type="datetime-local" class="form-control">
+    </div>
+    <div class="col-md-3">
+        <label asp-for="SellerMinPrice" class="form-label">Seller Minimum Price</label>
+        <div class="input-group">
+            <input asp-for="SellerMinPrice" min="0" step="0.01" type="number" class="form-control" placeholder="Enter seller minimum price">
+            <span class="input-group-text">$</span>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <label asp-for="MinBidIncrement" class="form-label">Minimum Bid Increment</label>
+        <div class="input-group">
+            <input asp-for="MinBidIncrement" min="0" step="0.01" type="number" class="form-control" placeholder="Enter minimum bid increment">
+            <span class="input-group-text">$</span>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <a asp-action="Index" class="btn btn-dark w-100">
+            <i class="bi bi-arrow-left"></i>
+            Back
+        </a>
+    </div>
+    <div class="col-md-6">
+        <button type="submit" class="btn btn-success w-100">
+            <i class="bi bi-plus-lg"></i>
+            Create
+        </button>
+    </div>
+</form>
