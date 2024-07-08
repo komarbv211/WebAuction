@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebAuction.Data;
 using WebAuction.Entities;
@@ -22,6 +23,7 @@ namespace WebAuction.Controllers
         }
         public IActionResult Create()
         {
+            ViewBag.Categories = new SelectList(ctx.Categories.ToList(), "Id", "Name");
             return View();
         }
 
