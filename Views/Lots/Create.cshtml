@@ -32,10 +32,6 @@
         <input asp-for="RateStep" min="1" type="number" class="form-control" placeholder="Enter rate step">
     </div>
     <div class="col-md-2">
-        <label asp-for="EndTime" class="form-label">End Time</label>
-        <input asp-for="EndTime" type="datetime-local" class="form-control">
-    </div>
-    <div class="col-md-2">
         <label asp-for="SellerMinPrice" class="form-label">Seller Minimum Price</label>
         <div class="input-group">
             <input asp-for="SellerMinPrice" min="0" step="0.01" type="number" class="form-control" placeholder="Enter seller minimum price">
@@ -48,6 +44,10 @@
             <input asp-for="MinBidIncrement" min="0" step="0.01" type="number" class="form-control" placeholder="Enter minimum bid increment">
             <span class="input-group-text">$</span>
         </div>
+    </div>
+    <div class="col-md-2">
+        <label asp-for="StartOfBidding" class="form-label">Start Of bidding</label>
+        <input asp-for="StartOfBidding" type="datetime-local" class="form-control">
     </div>
     <div class="col-md-6">
         <a asp-action="Index" class="btn btn-dark w-100">

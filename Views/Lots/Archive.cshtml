@@ -26,10 +26,10 @@
                 <td>@i.StartPrice$</td>
                 <td>@i.HighestBid$</td>
                 <td>@i.BidCount</td>
-                <td>@i.EndTime.ToString("MM/dd/yyyy HH:mm")</td>
+                <td>@i.StartOfBidding.ToString("MM/dd/yyyy HH:mm")</td>
                 <td>@i.Category?.Name</td>
                 <td>
-                    @if (i.EndTime > DateTime.Now)
+                    @if (i.StartOfBidding > DateTime.Now)
                     {
                         <span class="badge bg-success">Active</span>
                     }

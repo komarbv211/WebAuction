@@ -15,7 +15,7 @@
             <th scope="col">Start Price</th>
             <th scope="col">Highest Bid</th>
             <th scope="col">Bid Count</th>
-            <th scope="col">End Time</th>
+            <th scope="col">Start Of Bidding</th>
             <th scope="col">Category</th>
             <th scope="col">Status</th>
             <th scope="col">Actions</th>
@@ -30,16 +30,27 @@
                 <td>@i.StartPrice$</td>
                 <td>@i.HighestBid$</td>
                 <td>@i.BidCount</td>
-                <td>@i.EndTime.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@i.StartOfBidding.ToString("dd/MM/yyyy HH:mm")</td>
                 <td>@i.Category?.Name</td>
                 <td>
-                    @if (DateTime.Now < i.EndTime)
-                    {
-                        <span class="badge bg-success">Active</span>
-                    }
-                    else
-                    {
-                        <span class="badge bg-secondary">Ended</span>
+                    @{
+                        DateTime now = DateTime.Now;
+                        DateTime startOfBidding = i.StartOfBidding;
+                        bool isToday = now.Date == startOfBidding.Date;
+
+                        if (now < startOfBidding)
+                        {
+                            <span class="badge bg-success">Pending</span>
+                        }
+                        else if (isToday)
+                        {
+                            <span class="badge bg-success">Active</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Ended</span>
+                        }
+
                     }
 
                 </td>

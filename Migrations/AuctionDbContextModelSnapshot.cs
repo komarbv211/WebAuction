@@ -56,7 +56,7 @@ namespace WebAuction.Migrations
                         {
                             Id = 1,
                             Amount = 550m,
-                            BidTime = new DateTime(2024, 6, 30, 22, 58, 20, 822, DateTimeKind.Local).AddTicks(8847),
+                            BidTime = new DateTime(2024, 7, 3, 21, 52, 21, 451, DateTimeKind.Local).AddTicks(7334),
                             BidderId = 1,
                             ProductId = 1
                         },
@@ -64,7 +64,7 @@ namespace WebAuction.Migrations
                         {
                             Id = 2,
                             Amount = 600m,
-                            BidTime = new DateTime(2024, 7, 1, 22, 58, 20, 822, DateTimeKind.Local).AddTicks(8861),
+                            BidTime = new DateTime(2024, 7, 4, 21, 52, 21, 451, DateTimeKind.Local).AddTicks(7345),
                             BidderId = 3,
                             ProductId = 1
                         },
@@ -72,13 +72,13 @@ namespace WebAuction.Migrations
                         {
                             Id = 3,
                             Amount = 700m,
-                            BidTime = new DateTime(2024, 7, 2, 22, 58, 20, 822, DateTimeKind.Local).AddTicks(8866),
+                            BidTime = new DateTime(2024, 7, 5, 21, 52, 21, 451, DateTimeKind.Local).AddTicks(7350),
                             BidderId = 2,
                             ProductId = 1
                         });
                 });
 
-            modelBuilder.Entity("WebAuction.Entityes.Category", b =>
+            modelBuilder.Entity("WebAuction.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -142,7 +142,7 @@ namespace WebAuction.Migrations
                         });
                 });
 
-            modelBuilder.Entity("WebAuction.Entityes.Lot", b =>
+            modelBuilder.Entity("WebAuction.Entities.Lot", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -161,9 +161,6 @@ namespace WebAuction.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("HighestBid")
                         .HasColumnType("decimal(18,2)");
@@ -190,6 +187,9 @@ namespace WebAuction.Migrations
                     b.Property<decimal?>("SellerMinPrice")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<DateTime>("StartOfBidding")
+                        .HasColumnType("datetime2");
+
                     b.Property<decimal>("StartPrice")
                         .HasColumnType("decimal(18,2)");
 
@@ -207,7 +207,6 @@ namespace WebAuction.Migrations
                             BidCount = 0,
                             CategoryId = 1,
                             Description = "Latest model",
-                            EndTime = new DateTime(2024, 7, 6, 22, 58, 20, 822, DateTimeKind.Local).AddTicks(8539),
                             HighestBid = 0m,
                             IsAuctionActive = true,
                             LastRate = 650m,
@@ -215,6 +214,7 @@ namespace WebAuction.Migrations
                             Name = "iPhone X",
                             Quantity = 5,
                             RateStep = 10,
+                            StartOfBidding = new DateTime(2024, 7, 9, 21, 52, 21, 451, DateTimeKind.Local).AddTicks(7148),
                             StartPrice = 500m
                         },
                         new
@@ -224,7 +224,6 @@ namespace WebAuction.Migrations
                             BidCount = 0,
                             CategoryId = 2,
                             Description = "Strength training",
-                            EndTime = new DateTime(2024, 7, 10, 22, 58, 20, 822, DateTimeKind.Local).AddTicks(8630),
                             HighestBid = 0m,
                             IsAuctionActive = true,
                             LastRate = 45.5m,
@@ -232,6 +231,7 @@ namespace WebAuction.Migrations
                             Name = "PowerBall",
                             Quantity = 3,
                             RateStep = 5,
+                            StartOfBidding = new DateTime(2024, 7, 13, 21, 52, 21, 451, DateTimeKind.Local).AddTicks(7237),
                             StartPrice = 20m
                         },
                         new
@@ -241,7 +241,6 @@ namespace WebAuction.Migrations
                             BidCount = 0,
                             CategoryId = 3,
                             Description = "Comfortable sportswear",
-                            EndTime = new DateTime(2024, 7, 8, 22, 58, 20, 822, DateTimeKind.Local).AddTicks(8636),
                             HighestBid = 0m,
                             IsAuctionActive = true,
                             LastRate = 189m,
@@ -249,6 +248,7 @@ namespace WebAuction.Migrations
                             Name = "Nike T-Shirt",
                             Quantity = 3,
                             RateStep = 15,
+                            StartOfBidding = new DateTime(2024, 7, 11, 21, 52, 21, 451, DateTimeKind.Local).AddTicks(7244),
                             StartPrice = 50m
                         },
                         new
@@ -258,7 +258,6 @@ namespace WebAuction.Migrations
                             BidCount = 0,
                             CategoryId = 1,
                             Description = "Newest model",
-                            EndTime = new DateTime(2024, 7, 15, 22, 58, 20, 822, DateTimeKind.Local).AddTicks(8642),
                             HighestBid = 0m,
                             IsAuctionActive = true,
                             LastRate = 1200m,
@@ -266,6 +265,7 @@ namespace WebAuction.Migrations
                             Name = "Samsung S23",
                             Quantity = 0,
                             RateStep = 50,
+                            StartOfBidding = new DateTime(2024, 7, 18, 21, 52, 21, 451, DateTimeKind.Local).AddTicks(7249),
                             StartPrice = 1000m
                         },
                         new
@@ -275,7 +275,6 @@ namespace WebAuction.Migrations
                             BidCount = 0,
                             CategoryId = 6,
                             Description = "Toys for kids",
-                            EndTime = new DateTime(2024, 7, 9, 22, 58, 20, 822, DateTimeKind.Local).AddTicks(8648),
                             HighestBid = 0m,
                             IsAuctionActive = true,
                             LastRate = 50m,
@@ -283,6 +282,7 @@ namespace WebAuction.Migrations
                             Name = "Air Ball",
                             Quantity = 0,
                             RateStep = 5,
+                            StartOfBidding = new DateTime(2024, 7, 12, 21, 52, 21, 451, DateTimeKind.Local).AddTicks(7254),
                             StartPrice = 10m
                         },
                         new
@@ -292,7 +292,6 @@ namespace WebAuction.Migrations
                             BidCount = 0,
                             CategoryId = 1,
                             Description = "Powerful laptop",
-                            EndTime = new DateTime(2024, 7, 19, 22, 58, 20, 822, DateTimeKind.Local).AddTicks(8693),
                             HighestBid = 0m,
                             IsAuctionActive = true,
                             LastRate = 2300m,
@@ -300,6 +299,7 @@ namespace WebAuction.Migrations
                             Name = "MacBook Pro 2019",
                             Quantity = 23,
                             RateStep = 100,
+                            StartOfBidding = new DateTime(2024, 7, 22, 21, 52, 21, 451, DateTimeKind.Local).AddTicks(7262),
                             StartPrice = 2000m
                         },
                         new
@@ -309,7 +309,6 @@ namespace WebAuction.Migrations
                             BidCount = 0,
                             CategoryId = 2,
                             Description = "Older model",
-                            EndTime = new DateTime(2024, 7, 7, 22, 58, 20, 822, DateTimeKind.Local).AddTicks(8699),
                             HighestBid = 0m,
                             IsAuctionActive = true,
                             LastRate = 440m,
@@ -317,22 +316,23 @@ namespace WebAuction.Migrations
                             Name = "Samsung S4",
                             Quantity = 0,
                             RateStep = 20,
+                            StartOfBidding = new DateTime(2024, 7, 10, 21, 52, 21, 451, DateTimeKind.Local).AddTicks(7267),
                             StartPrice = 100m
                         });
                 });
 
             modelBuilder.Entity("WebAuction.Entities.Bid", b =>
                 {
-                    b.HasOne("WebAuction.Entityes.Lot", "Lot")
+                    b.HasOne("WebAuction.Entities.Lot", "Lot")
                         .WithMany("Bids")
                         .HasForeignKey("LotId");
 
                     b.Navigation("Lot");
                 });
 
-            modelBuilder.Entity("WebAuction.Entityes.Lot", b =>
+            modelBuilder.Entity("WebAuction.Entities.Lot", b =>
                 {
-                    b.HasOne("WebAuction.Entityes.Category", "Category")
+                    b.HasOne("WebAuction.Entities.Category", "Category")
                         .WithMany("Lots")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -341,12 +341,12 @@ namespace WebAuction.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("WebAuction.Entityes.Category", b =>
+            modelBuilder.Entity("WebAuction.Entities.Category", b =>
                 {
                     b.Navigation("Lots");
                 });
 
-            modelBuilder.Entity("WebAuction.Entityes.Lot", b =>
+            modelBuilder.Entity("WebAuction.Entities.Lot", b =>
                 {
                     b.Navigation("Bids");
                 });

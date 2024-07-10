@@ -16,7 +16,7 @@
         public decimal LastRate { get; set; }
         public int RateStep { get; set; }
         public decimal StartPrice { get; set; }
-        public DateTime EndTime { get; set; }
+        public DateTime StartOfBidding { get; set; }
         public int BidCount { get; set; }
         public bool IsAuctionActive { get; set; }
         public decimal HighestBid { get; set; }
