@@ -40,7 +40,7 @@
 
                         if (now < startOfBidding)
                         {
-                            <span class="badge bg-success">Pending</span>
+                            <span class="badge bg-primary">Pending</span>
                         }
                         else if (isToday)
                         {
@@ -50,11 +50,13 @@
                         {
                             <span class="badge bg-secondary">Ended</span>
                         }
-
                     }
 
                 </td>
                 <td>
+                    <a asp-controller="Lots" asp-action="Edit" asp-route-id="@i.Id" class="btn btn-outline-info">
+                        <i class="bi bi-pencil-fill"></i>
+                    </a>
                     <a asp-controller="Lots" asp-action="ArchiveItem" asp-route-id="@i.Id" class="btn btn-outline-warning">
                         <i class="bi bi-archive-fill"></i>
                     </a>

@@ -14,17 +14,18 @@ namespace WebAuction.Controllers
         }
         public IActionResult Index()
         {
-            var products = ctx.Lots
+            var lots = ctx.Lots
                 .Include(x => x.Category)
                 .Where(x => !x.Archived)
                 .ToList();
 
-            return View(products);
+            return View(lots);
         }
         public IActionResult Create()
         {
-            ViewBag.Categories = new SelectList(ctx.Categories.ToList(), "Id", "Name");
-            return View();
+            LoadCategories();
+            ViewBag.CreateMode = true;
+            return View("Upsert");
         }
 
         [HttpPost]
@@ -35,6 +36,27 @@ namespace WebAuction.Controllers
 
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var lot = ctx.Lots.Find(id);
+
+            if (lot == null) return NotFound();
+
+            LoadCategories();
+            ViewBag.CreateMode = false;
+            return View("Upsert", lot);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Lot model)
+        {
+            ctx.Lots.Update(model);
+            ctx.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Archive()
         {
             var lot = ctx.Lots
@@ -47,11 +69,11 @@ namespace WebAuction.Controllers
 
         public IActionResult ArchiveItem(int id)
         {
-            var product = ctx.Lots.Find(id);
+            var lot = ctx.Lots.Find(id);
 
-            if (product == null) return NotFound();
+            if (lot == null) return NotFound();
 
-            product.Archived = true;
+            lot.Archived = true;
             ctx.SaveChanges();
 
             return RedirectToAction("Index");
@@ -59,25 +81,31 @@ namespace WebAuction.Controllers
 
         public IActionResult Delete(int id)
         {
-            var product = ctx.Lots.Find(id);
+            var lot = ctx.Lots.Find(id);
 
-            if (product == null) return NotFound();
+            if (lot == null) return NotFound();
 
-            ctx.Lots.Remove(product);
+            ctx.Lots.Remove(lot);
             ctx.SaveChanges();
 
             return RedirectToAction("Archive");
         }
         public IActionResult RestoreItem(int id)
         {
-            var product = ctx.Lots.Find(id);
+            var lot = ctx.Lots.Find(id);
 
-            if (product == null) return NotFound();
+            if (lot == null) return NotFound();
 
-            product.Archived = false;
+            lot.Archived = false;
             ctx.SaveChanges();
 
             return RedirectToAction("Archive");
+        }
+
+        private void LoadCategories()
+        {
+            
+            ViewBag.Categories = new SelectList(ctx.Categories.ToList(), "Id", "Name");
         }
     }
 }
