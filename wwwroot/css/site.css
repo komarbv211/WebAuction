@@ -27,3 +27,8 @@ body {
 .admin-lot-table img:hover {
     transform: scale(3)
 }
+
+.home-lot-list .card img {
+    object-fit: contain;
+    margin-top: 4px;
+}
