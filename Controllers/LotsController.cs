@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using WebAuction.Data;
-using WebAuction.Dtos;
-using WebAuction.Entities;
+using Data.Data;
+using Core.Dtos;
+using Data.Entities;
 
 namespace WebAuction.Controllers
 {

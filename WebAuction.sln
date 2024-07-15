@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAuction", "WebAuction.csproj", "{4191BD79-3E4B-4C39-A315-3800294CFD72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAuction", "WebAuction.csproj", "{4191BD79-3E4B-4C39-A315-3800294CFD72}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "..\Core\Core.csproj", "{8D86E81C-94BC-4953-AEED-FDA73167291A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "..\Data\Data.csproj", "{46177866-8DF6-4C40-9F31-85E2ED650D02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{4191BD79-3E4B-4C39-A315-3800294CFD72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4191BD79-3E4B-4C39-A315-3800294CFD72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4191BD79-3E4B-4C39-A315-3800294CFD72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D86E81C-94BC-4953-AEED-FDA73167291A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D86E81C-94BC-4953-AEED-FDA73167291A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D86E81C-94BC-4953-AEED-FDA73167291A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D86E81C-94BC-4953-AEED-FDA73167291A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46177866-8DF6-4C40-9F31-85E2ED650D02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46177866-8DF6-4C40-9F31-85E2ED650D02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46177866-8DF6-4C40-9F31-85E2ED650D02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46177866-8DF6-4C40-9F31-85E2ED650D02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

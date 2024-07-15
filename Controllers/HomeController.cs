@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
-using WebAuction.Data;
+using Data.Data;
 using WebAuction.Models;
 
 namespace WebAuction.Controllers
