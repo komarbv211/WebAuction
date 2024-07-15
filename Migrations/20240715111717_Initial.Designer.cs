@@ -12,8 +12,8 @@ using WebAuction.Data;
 namespace WebAuction.Migrations
 {
     [DbContext(typeof(AuctionDbContext))]
-    [Migration("20240710173048_Ititial")]
-    partial class Ititial
+    [Migration("20240715111717_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,7 +59,7 @@ namespace WebAuction.Migrations
                         {
                             Id = 1,
                             Amount = 550m,
-                            BidTime = new DateTime(2024, 7, 5, 20, 30, 47, 243, DateTimeKind.Local).AddTicks(379),
+                            BidTime = new DateTime(2024, 7, 10, 14, 17, 16, 865, DateTimeKind.Local).AddTicks(763),
                             BidderId = 1,
                             ProductId = 1
                         },
@@ -67,7 +67,7 @@ namespace WebAuction.Migrations
                         {
                             Id = 2,
                             Amount = 600m,
-                            BidTime = new DateTime(2024, 7, 6, 20, 30, 47, 243, DateTimeKind.Local).AddTicks(391),
+                            BidTime = new DateTime(2024, 7, 11, 14, 17, 16, 865, DateTimeKind.Local).AddTicks(775),
                             BidderId = 3,
                             ProductId = 1
                         },
@@ -75,7 +75,7 @@ namespace WebAuction.Migrations
                         {
                             Id = 3,
                             Amount = 700m,
-                            BidTime = new DateTime(2024, 7, 7, 20, 30, 47, 243, DateTimeKind.Local).AddTicks(396),
+                            BidTime = new DateTime(2024, 7, 12, 14, 17, 16, 865, DateTimeKind.Local).AddTicks(780),
                             BidderId = 2,
                             ProductId = 1
                         });
@@ -221,7 +221,7 @@ namespace WebAuction.Migrations
                             Name = "iPhone X",
                             Quantity = 5,
                             RateStep = 10,
-                            StartOfBidding = new DateTime(2024, 7, 11, 20, 30, 47, 243, DateTimeKind.Local).AddTicks(165),
+                            StartOfBidding = new DateTime(2024, 7, 16, 14, 17, 16, 865, DateTimeKind.Local).AddTicks(560),
                             StartPrice = 500m
                         },
                         new
@@ -239,7 +239,7 @@ namespace WebAuction.Migrations
                             Name = "PowerBall",
                             Quantity = 3,
                             RateStep = 5,
-                            StartOfBidding = new DateTime(2024, 7, 15, 20, 30, 47, 243, DateTimeKind.Local).AddTicks(257),
+                            StartOfBidding = new DateTime(2024, 7, 20, 14, 17, 16, 865, DateTimeKind.Local).AddTicks(655),
                             StartPrice = 20m
                         },
                         new
@@ -257,7 +257,7 @@ namespace WebAuction.Migrations
                             Name = "Nike T-Shirt",
                             Quantity = 3,
                             RateStep = 15,
-                            StartOfBidding = new DateTime(2024, 7, 13, 20, 30, 47, 243, DateTimeKind.Local).AddTicks(263),
+                            StartOfBidding = new DateTime(2024, 7, 18, 14, 17, 16, 865, DateTimeKind.Local).AddTicks(661),
                             StartPrice = 50m
                         },
                         new
@@ -275,7 +275,7 @@ namespace WebAuction.Migrations
                             Name = "Samsung S23",
                             Quantity = 0,
                             RateStep = 50,
-                            StartOfBidding = new DateTime(2024, 7, 20, 20, 30, 47, 243, DateTimeKind.Local).AddTicks(287),
+                            StartOfBidding = new DateTime(2024, 7, 25, 14, 17, 16, 865, DateTimeKind.Local).AddTicks(667),
                             StartPrice = 1000m
                         },
                         new
@@ -293,7 +293,7 @@ namespace WebAuction.Migrations
                             Name = "Air Ball",
                             Quantity = 0,
                             RateStep = 5,
-                            StartOfBidding = new DateTime(2024, 7, 14, 20, 30, 47, 243, DateTimeKind.Local).AddTicks(295),
+                            StartOfBidding = new DateTime(2024, 7, 19, 14, 17, 16, 865, DateTimeKind.Local).AddTicks(673),
                             StartPrice = 10m
                         },
                         new
@@ -311,7 +311,7 @@ namespace WebAuction.Migrations
                             Name = "MacBook Pro 2019",
                             Quantity = 23,
                             RateStep = 100,
-                            StartOfBidding = new DateTime(2024, 7, 24, 20, 30, 47, 243, DateTimeKind.Local).AddTicks(303),
+                            StartOfBidding = new DateTime(2024, 7, 29, 14, 17, 16, 865, DateTimeKind.Local).AddTicks(682),
                             StartPrice = 2000m
                         },
                         new
@@ -329,7 +329,7 @@ namespace WebAuction.Migrations
                             Name = "Samsung S4",
                             Quantity = 0,
                             RateStep = 20,
-                            StartOfBidding = new DateTime(2024, 7, 12, 20, 30, 47, 243, DateTimeKind.Local).AddTicks(309),
+                            StartOfBidding = new DateTime(2024, 7, 17, 14, 17, 16, 865, DateTimeKind.Local).AddTicks(688),
                             StartPrice = 100m
                         });
                 });

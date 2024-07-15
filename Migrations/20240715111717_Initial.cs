@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebAuction.Migrations
 {
     /// <inheritdoc />
-    public partial class Ititial : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -86,9 +86,9 @@ namespace WebAuction.Migrations
                 columns: new[] { "Id", "Amount", "BidTime", "BidderId", "LotId", "ProductId" },
                 values: new object[,]
                 {
-                    { 1, 550m, new DateTime(2024, 7, 5, 20, 30, 47, 243, DateTimeKind.Local).AddTicks(379), 1, null, 1 },
-                    { 2, 600m, new DateTime(2024, 7, 6, 20, 30, 47, 243, DateTimeKind.Local).AddTicks(391), 3, null, 1 },
-                    { 3, 700m, new DateTime(2024, 7, 7, 20, 30, 47, 243, DateTimeKind.Local).AddTicks(396), 2, null, 1 }
+                    { 1, 550m, new DateTime(2024, 7, 10, 14, 17, 16, 865, DateTimeKind.Local).AddTicks(763), 1, null, 1 },
+                    { 2, 600m, new DateTime(2024, 7, 11, 14, 17, 16, 865, DateTimeKind.Local).AddTicks(775), 3, null, 1 },
+                    { 3, 700m, new DateTime(2024, 7, 12, 14, 17, 16, 865, DateTimeKind.Local).AddTicks(780), 2, null, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -112,13 +112,13 @@ namespace WebAuction.Migrations
                 columns: new[] { "Id", "Archived", "BidCount", "CategoryId", "Description", "HighestBid", "ImageUrl", "IsAuctionActive", "LastRate", "MinBidIncrement", "Name", "Quantity", "RateStep", "SellerMinPrice", "StartOfBidding", "StartPrice" },
                 values: new object[,]
                 {
-                    { 1, false, 0, 1, "Latest model", 0m, "https://cdn.new-brz.net/app/public/models/MQAG2/large/w/180413170205345780.webp", true, 650m, 50m, "iPhone X", 5, 10, null, new DateTime(2024, 7, 11, 20, 30, 47, 243, DateTimeKind.Local).AddTicks(165), 500m },
-                    { 2, false, 0, 2, "Strength training", 0m, "https://powerball.ua/content/images/46/480x480l50nn0/kystovyi-trenazher-powerball-e-titan-pro-electric-start-85723670147321.jpg", true, 45.5m, 5m, "PowerBall", 3, 5, null, new DateTime(2024, 7, 15, 20, 30, 47, 243, DateTimeKind.Local).AddTicks(257), 20m },
-                    { 3, false, 0, 3, "Comfortable sportswear", 0m, "https://lh5.googleusercontent.com/proxy/mMh-P0oMHtmHlosJf4VKCNQEIq6201qQb8iaWP39c24dFaWNo8rM8EOVQevKbhc8vOrMbmCUJYR_PEfdrx4MVqd5dlIggBUvJmUSTKO2JnI", true, 189m, 10m, "Nike T-Shirt", 3, 15, null, new DateTime(2024, 7, 13, 20, 30, 47, 243, DateTimeKind.Local).AddTicks(263), 50m },
-                    { 4, false, 0, 1, "Newest model", 0m, "https://hotline.ua/img/tx/370/3708775135.jpg", true, 1200m, 100m, "Samsung S23", 0, 50, null, new DateTime(2024, 7, 20, 20, 30, 47, 243, DateTimeKind.Local).AddTicks(287), 1000m },
-                    { 5, false, 0, 6, "Toys for kids", 0m, "https://sport.qc.ca/wp-content/uploads/2021/01/dsl-original-images/loi_air18_18_air_ball_ballon_air_18_1486249200_1488836710.jpg", true, 50m, 2m, "Air Ball", 0, 5, null, new DateTime(2024, 7, 14, 20, 30, 47, 243, DateTimeKind.Local).AddTicks(295), 10m },
-                    { 6, false, 0, 1, "Powerful laptop", 0m, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyR7bUxH63AoIF2_TESOi2pgOgdEn5x4qAYA&s", true, 2300m, 200m, "MacBook Pro 2019", 23, 100, null, new DateTime(2024, 7, 24, 20, 30, 47, 243, DateTimeKind.Local).AddTicks(303), 2000m },
-                    { 7, false, 0, 2, "Older model", 0m, "https://remont2.lvivservice.com.ua/upload/iblock/b39/S4.png", true, 440m, 10m, "Samsung S4", 0, 20, null, new DateTime(2024, 7, 12, 20, 30, 47, 243, DateTimeKind.Local).AddTicks(309), 100m }
+                    { 1, false, 0, 1, "Latest model", 0m, "https://cdn.new-brz.net/app/public/models/MQAG2/large/w/180413170205345780.webp", true, 650m, 50m, "iPhone X", 5, 10, null, new DateTime(2024, 7, 16, 14, 17, 16, 865, DateTimeKind.Local).AddTicks(560), 500m },
+                    { 2, false, 0, 2, "Strength training", 0m, "https://powerball.ua/content/images/46/480x480l50nn0/kystovyi-trenazher-powerball-e-titan-pro-electric-start-85723670147321.jpg", true, 45.5m, 5m, "PowerBall", 3, 5, null, new DateTime(2024, 7, 20, 14, 17, 16, 865, DateTimeKind.Local).AddTicks(655), 20m },
+                    { 3, false, 0, 3, "Comfortable sportswear", 0m, "https://lh5.googleusercontent.com/proxy/mMh-P0oMHtmHlosJf4VKCNQEIq6201qQb8iaWP39c24dFaWNo8rM8EOVQevKbhc8vOrMbmCUJYR_PEfdrx4MVqd5dlIggBUvJmUSTKO2JnI", true, 189m, 10m, "Nike T-Shirt", 3, 15, null, new DateTime(2024, 7, 18, 14, 17, 16, 865, DateTimeKind.Local).AddTicks(661), 50m },
+                    { 4, false, 0, 1, "Newest model", 0m, "https://hotline.ua/img/tx/370/3708775135.jpg", true, 1200m, 100m, "Samsung S23", 0, 50, null, new DateTime(2024, 7, 25, 14, 17, 16, 865, DateTimeKind.Local).AddTicks(667), 1000m },
+                    { 5, false, 0, 6, "Toys for kids", 0m, "https://sport.qc.ca/wp-content/uploads/2021/01/dsl-original-images/loi_air18_18_air_ball_ballon_air_18_1486249200_1488836710.jpg", true, 50m, 2m, "Air Ball", 0, 5, null, new DateTime(2024, 7, 19, 14, 17, 16, 865, DateTimeKind.Local).AddTicks(673), 10m },
+                    { 6, false, 0, 1, "Powerful laptop", 0m, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyR7bUxH63AoIF2_TESOi2pgOgdEn5x4qAYA&s", true, 2300m, 200m, "MacBook Pro 2019", 23, 100, null, new DateTime(2024, 7, 29, 14, 17, 16, 865, DateTimeKind.Local).AddTicks(682), 2000m },
+                    { 7, false, 0, 2, "Older model", 0m, "https://remont2.lvivservice.com.ua/upload/iblock/b39/S4.png", true, 440m, 10m, "Samsung S4", 0, 20, null, new DateTime(2024, 7, 17, 14, 17, 16, 865, DateTimeKind.Local).AddTicks(688), 100m }
                 });
 
             migrationBuilder.CreateIndex(

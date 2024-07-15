@@ -31,6 +31,12 @@ namespace WebAuction.Controllers
         [HttpPost]
         public IActionResult Create(Lot model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.CreateMode = true;
+                LoadCategories();
+                return View("Upsert", model);
+            }
             ctx.Lots.Add(model);
             ctx.SaveChanges();
 
@@ -51,6 +57,12 @@ namespace WebAuction.Controllers
         [HttpPost]
         public IActionResult Edit(Lot model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.CreateMode = false;
+                LoadCategories();
+                return View("Upsert", model);
+            }
             ctx.Lots.Update(model);
             ctx.SaveChanges();
 
@@ -60,7 +72,7 @@ namespace WebAuction.Controllers
         public IActionResult Archive()
         {
             var lot = ctx.Lots
-                .Include(x => x.Category) 
+                .Include(x => x.Category)
                 .Where(x => x.Archived)
                 .ToList();
 
@@ -104,7 +116,7 @@ namespace WebAuction.Controllers
 
         private void LoadCategories()
         {
-            
+
             ViewBag.Categories = new SelectList(ctx.Categories.ToList(), "Id", "Name");
         }
     }

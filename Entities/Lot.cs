@@ -1,10 +1,10 @@
-﻿namespace WebAuction.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WebAuction.Entities
 {
     public class Lot
     {
         public int Id { get; set; }
-
-        // Основні характеристики продукту
         public string Name { get; set; }
         public string? ImageUrl { get; set; }
         public string? Description { get; set; }
