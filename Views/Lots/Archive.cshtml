@@ -1,5 +1,4 @@
-﻿@using WebAuction.Entities
-@model List<Lot>
+﻿@model List<LotDto>
 <h1>Archived Lots</h1>
 <p>You can restore or delete lots here.</p>
 
@@ -27,7 +26,7 @@
                 <td>@i.HighestBid$</td>
                 <td>@i.BidCount</td>
                 <td>@i.StartOfBidding.ToString("MM/dd/yyyy HH:mm")</td>
-                <td>@i.Category?.Name</td>
+                <td>@i.CategoryName</td>
                 <td>
                     @if (i.StartOfBidding > DateTime.Now)
                     {

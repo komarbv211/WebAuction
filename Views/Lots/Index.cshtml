@@ -1,5 +1,5 @@
 ﻿@using WebAuction.Entities
-@model List<Lot>
+@model List<LotDto>
 
 <h1>Lot List</h1>
 <p>You can manage lots here.</p>
@@ -35,7 +35,7 @@
                 <td>@i.HighestBid$</td>
                 <td>@i.BidCount</td>
                 <td>@i.StartOfBidding.ToString("dd/MM/yyyy HH:mm")</td>
-                <td>@i.Category?.Name</td>
+                <td>@i.CategoryName</td>
                 <td>
                     @{
                         DateTime now = DateTime.Now;

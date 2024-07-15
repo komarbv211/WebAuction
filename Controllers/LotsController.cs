@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebAuction.Data;
+using WebAuction.Dtos;
 using WebAuction.Entities;
 
 namespace WebAuction.Controllers
@@ -9,9 +11,14 @@ namespace WebAuction.Controllers
     public class LotsController : Controller
     {
         private AuctionDbContext ctx = new AuctionDbContext();
-        public LotsController()
+
+        private readonly IMapper mapper;
+
+        public LotsController(IMapper mapper)
         {
+            this.mapper = mapper;
         }
+
         public IActionResult Index()
         {
             var lots = ctx.Lots
@@ -19,7 +26,7 @@ namespace WebAuction.Controllers
                 .Where(x => !x.Archived)
                 .ToList();
 
-            return View(lots);
+            return View(mapper.Map<List<LotDto>>(lots));
         }
         public IActionResult Create()
         {
@@ -29,7 +36,7 @@ namespace WebAuction.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Lot model)
+        public IActionResult Create(LotDto model)
         {
             if (!ModelState.IsValid)
             {
@@ -37,7 +44,7 @@ namespace WebAuction.Controllers
                 LoadCategories();
                 return View("Upsert", model);
             }
-            ctx.Lots.Add(model);
+            ctx.Lots.Add(mapper.Map<Lot>(model));
             ctx.SaveChanges();
 
             return RedirectToAction("Index");
@@ -51,11 +58,11 @@ namespace WebAuction.Controllers
 
             LoadCategories();
             ViewBag.CreateMode = false;
-            return View("Upsert", lot);
+            return View("Upsert", mapper.Map<LotDto>(lot));
         }
 
         [HttpPost]
-        public IActionResult Edit(Lot model)
+        public IActionResult Edit(LotDto model)
         {
             if (!ModelState.IsValid)
             {
@@ -63,7 +70,7 @@ namespace WebAuction.Controllers
                 LoadCategories();
                 return View("Upsert", model);
             }
-            ctx.Lots.Update(model);
+            ctx.Lots.Update(mapper.Map<Lot>(model));
             ctx.SaveChanges();
 
             return RedirectToAction("Index");
@@ -71,12 +78,12 @@ namespace WebAuction.Controllers
 
         public IActionResult Archive()
         {
-            var lot = ctx.Lots
+            var lots = ctx.Lots
                 .Include(x => x.Category)
                 .Where(x => x.Archived)
                 .ToList();
 
-            return View(lot);
+            return View(mapper.Map<List<LotDto>>(lots));
         }
 
         public IActionResult ArchiveItem(int id)
