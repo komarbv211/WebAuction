@@ -10,12 +10,12 @@ namespace WebAuction.Controllers
 {
     public class LotsController : Controller
     {
-        private AuctionDbContext ctx = new AuctionDbContext();
-
+        private readonly AuctionDbContext ctx;
         private readonly IMapper mapper;
 
-        public LotsController(IMapper mapper)
+        public LotsController(AuctionDbContext context, IMapper mapper)
         {
+            this.ctx = context;
             this.mapper = mapper;
         }
 
