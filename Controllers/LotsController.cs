@@ -120,7 +120,6 @@ namespace WebAuction.Controllers
 
             return RedirectToAction("Archive");
         }
-
         private void LoadCategories()
         {
 
