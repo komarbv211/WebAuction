@@ -1,19 +1,21 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using Core.Dtos;
+using Data.Data;
+using Microsoft.EntityFrameworkCore;
 using WebAuction.Extensions;
 
 namespace WebAuction.Services
 {
-    internal class FavoriteServices
+    public class FavoriteServices
     {
         private readonly HttpContext httpContext;
-        public FavoriteServices(IHttpContextAccessor contextAccessor)
+        private readonly IMapper mapper;
+        private readonly AuctionDbContext context;
+        public FavoriteServices(IHttpContextAccessor contextAccessor, IMapper mapper, AuctionDbContext context)
         {
             httpContext = contextAccessor.HttpContext!;
+            this.mapper = mapper;
+            this.context = context;
         }
 
         public int GetCount()
@@ -23,6 +25,36 @@ namespace WebAuction.Services
             if (ids == null) return 0;
 
             return ids.Distinct().Count();
+        }
+        public List<LotDto> GetLots()
+        {
+            var ids = httpContext.Session.Get<List<int>>("favorite_items") ?? new();
+
+            var products = context.Lots.Include(x => x.Category).Where(x => ids.Contains(x.Id)).ToList();
+
+            return mapper.Map<List<LotDto>>(products);
+        }
+
+        public void AddItem(int id)
+        {
+            var ids = httpContext.Session.Get<List<int>>("favorite_items");
+
+            if (ids == null) ids = new();
+
+            ids.Add(id);
+
+            httpContext.Session.Set("favorite_items", ids);
+        }
+
+        public void RemoveItem(int id)
+        {
+            var ids = httpContext.Session.Get<List<int>>("favorite_items");
+
+            if (ids == null || !ids.Contains(id)) return; // throw exception
+
+            ids.Remove(id);
+
+            httpContext.Session.Set("favorite_items", ids);
         }
     }
 }

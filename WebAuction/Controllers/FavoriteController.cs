@@ -1,51 +1,32 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Core.Dtos;
-using Data.Data;
-using Microsoft.EntityFrameworkCore;
-using WebAuction.Extensions;
+﻿using Microsoft.AspNetCore.Mvc;
+using WebAuction.Services;
+
 
 namespace WebAuction.Controllers
 {
     public class FavoriteController : Controller
     {
-        private readonly AuctionDbContext context;
-        private readonly IMapper mapper;
+        private readonly FavoriteServices favoriteServices;
 
-        public FavoriteController(AuctionDbContext context, IMapper mapper)
+        public FavoriteController(FavoriteServices favoriteServices)
         {
-            this.context = context;
-            this.mapper = mapper;
+            this.favoriteServices = favoriteServices;
         }
         public IActionResult Index()
         {
-            var ids = HttpContext.Session.Get<List<int>>("favorite_items") ?? new();
-
-            var products = context.Lots.Include(x => x.Category).Where(x => ids.Contains(x.Id)).ToList();
-
-            return View(mapper.Map<List<LotDto>>(products));
+            return View(favoriteServices.GetLots());
         }
 
         public IActionResult Add(int id)
         {
-            var ids = HttpContext.Session.Get<List<int>>("favorite_items");
-
-            if (ids == null) ids = new();
-            ids.Add(id);
-
-            HttpContext.Session.Set("favorite_items", ids);
+            favoriteServices.AddItem(id);
 
             return RedirectToAction("Index");
         }
 
         public IActionResult Remove(int id)
         {
-            var ids = HttpContext.Session.Get<List<int>>("favorite_items");
-
-            if (ids == null || !ids.Contains(id)) return NotFound();
-            ids.Remove(id);
-
-            HttpContext.Session.Set("favorite_items", ids);
+            favoriteServices.RemoveItem(id);
 
             return RedirectToAction("Index");
         }
