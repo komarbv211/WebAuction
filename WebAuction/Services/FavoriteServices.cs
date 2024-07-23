@@ -30,9 +30,9 @@ namespace WebAuction.Services
         {
             var ids = httpContext.Session.Get<List<int>>("favorite_items") ?? new();
 
-            var products = context.Lots.Include(x => x.Category).Where(x => ids.Contains(x.Id)).ToList();
+            var lots = context.Lots.Include(x => x.Category).Where(x => ids.Contains(x.Id)).ToList();
 
-            return mapper.Map<List<LotDto>>(products);
+            return mapper.Map<List<LotDto>>(lots);
         }
 
         public void AddItem(int id)

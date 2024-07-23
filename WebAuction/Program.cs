@@ -1,4 +1,6 @@
+using Core.Interfaces;
 using Core.MapperProfiles;
+using Core.Services;
 using Data.Data;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -31,6 +33,7 @@ builder.Services.AddSession(options =>
 });
 
 builder.Services.AddScoped<FavoriteServices>();
+builder.Services.AddScoped<ILotService, LotService>();
 
 var app = builder.Build();
 

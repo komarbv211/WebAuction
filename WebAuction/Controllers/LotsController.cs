@@ -5,28 +5,24 @@ using Microsoft.EntityFrameworkCore;
 using Data.Data;
 using Core.Dtos;
 using Data.Entities;
+using Core.Interfaces;
 
 namespace WebAuction.Controllers
 {
     public class LotsController : Controller
     {
-        private readonly AuctionDbContext ctx;
-        private readonly IMapper mapper;
+        private readonly ILotService _lotService;
 
-        public LotsController(AuctionDbContext context, IMapper mapper)
+        public LotsController(ILotService lotService)
         {
-            this.ctx = context;
-            this.mapper = mapper;
+            _lotService = lotService;
         }
 
         public IActionResult Index()
         {
-            var lots = ctx.Lots
-                .Include(x => x.Category)
-                .Where(x => !x.Archived)
-                .ToList();
+            var lots = _lotService.GetActiveLots();
 
-            return View(mapper.Map<List<LotDto>>(lots));
+            return View(lots);
         }
         public IActionResult Create()
         {
@@ -44,21 +40,20 @@ namespace WebAuction.Controllers
                 LoadCategories();
                 return View("Upsert", model);
             }
-            ctx.Lots.Add(mapper.Map<Lot>(model));
-            ctx.SaveChanges();
+            _lotService.CreateLot(model);
 
             return RedirectToAction("Index");
         }
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var lot = ctx.Lots.Find(id);
+            var lot = _lotService.GetLotById(id);
 
             if (lot == null) return NotFound();
 
             LoadCategories();
             ViewBag.CreateMode = false;
-            return View("Upsert", mapper.Map<LotDto>(lot));
+            return View("Upsert", lot);
         }
 
         [HttpPost]
@@ -70,60 +65,40 @@ namespace WebAuction.Controllers
                 LoadCategories();
                 return View("Upsert", model);
             }
-            ctx.Lots.Update(mapper.Map<Lot>(model));
-            ctx.SaveChanges();
+            _lotService.UpdateLot(model);
 
             return RedirectToAction("Index");
         }
 
         public IActionResult Archive()
         {
-            var lots = ctx.Lots
-                .Include(x => x.Category)
-                .Where(x => x.Archived)
-                .ToList();
+            var lots = _lotService.GetArchivedLots();
 
-            return View(mapper.Map<List<LotDto>>(lots));
+            return View(lots);
         }
 
         public IActionResult ArchiveItem(int id)
         {
-            var lot = ctx.Lots.Find(id);
-
-            if (lot == null) return NotFound();
-
-            lot.Archived = true;
-            ctx.SaveChanges();
+           _lotService.ArchiveLot(id);
 
             return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)
         {
-            var lot = ctx.Lots.Find(id);
-
-            if (lot == null) return NotFound();
-
-            ctx.Lots.Remove(lot);
-            ctx.SaveChanges();
+            _lotService.DeleteLot(id);
 
             return RedirectToAction("Archive");
         }
         public IActionResult RestoreItem(int id)
         {
-            var lot = ctx.Lots.Find(id);
-
-            if (lot == null) return NotFound();
-
-            lot.Archived = false;
-            ctx.SaveChanges();
+            _lotService.RestoreLot(id);
 
             return RedirectToAction("Archive");
         }
         private void LoadCategories()
         {
-
-            ViewBag.Categories = new SelectList(ctx.Categories.ToList(), "Id", "Name");
+            ViewBag.Categories = new SelectList(_lotService.GetCategories(), "Id", "Name");
         }
     }
 }
