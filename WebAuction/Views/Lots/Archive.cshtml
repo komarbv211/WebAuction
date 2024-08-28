@@ -1,0 +1,60 @@
+﻿@model List<LotDto>
+<h1>Archived Lots</h1>
+<p>You can restore or delete lots here.</p>
+
+<table class="table">
+    <thead>
+        <tr class="table-dark">
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Start Price</th>
+            <th scope="col">Highest Bid</th>
+            <th scope="col">Bid Count</th>
+            <th scope="col">End Time</th>
+            <th scope="col">Category</th>
+            <th scope="col">Status</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <th scope="row">@i.Id</th>
+                <td>@i.Name</td>
+                <td>@i.StartPrice$</td>
+                <td>@i.HighestBid$</td>
+                <td>@i.BidCount</td>
+                <td>@i.StartOfBidding.ToString("MM/dd/yyyy HH:mm")</td>
+                <td>@i.CategoryName</td>
+                <td>
+                    @if (i.StartOfBidding > DateTime.Now)
+                    {
+                        <span class="badge bg-success">Active</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Ended</span>
+                    }
+                </td>
+                <td>
+                    <a asp-controller="Lots" asp-action="RestoreItem" asp-route-id="@i.Id" class="btn btn-outline-warning">
+                        <i class="bi bi-arrow-counterclockwise"></i>
+                    </a>
+
+                    <a asp-controller="Lots" asp-action="Delete" asp-route-id="@i.Id" class="btn btn-outline-danger">
+                        <i class="bi bi-trash-fill"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>Count: @Model.Count</p>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">
+        <i class="bi bi-arrow-left"></i>
+        <span>Go Back</span>
+    </a>
+</div>

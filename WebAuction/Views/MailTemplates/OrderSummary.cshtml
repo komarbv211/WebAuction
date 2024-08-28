@@ -1,0 +1,130 @@
+﻿@model Core.Models.OrderSummaryModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congratulations on Your Auction Win!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e2e2e2;
+        }
+        .header h1 {
+            margin: 0;
+            color: #333333;
+        }
+        .content {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .content p {
+            margin: 0 0 10px;
+            color: #666666;
+        }
+        .content ul {
+            padding-left: 20px;
+            list-style: none;
+            margin: 0;
+        }
+        .content li {
+            margin-bottom: 10px;
+            color: #333333;
+        }
+        .item-details {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .item-details img {
+            max-width: 150px;
+            border-radius: 8px;
+            margin-right: 20px;
+        }
+        .item-details div {
+            flex: 1;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .footer {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 2px solid #e2e2e2;
+            color: #999999;
+        }
+        @('@')media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            .item-details {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .item-details img {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Congratulations, @Model.UserName!</h1>
+        </div>
+        <div class="content">
+            <div class="tekst-crnter"
+            <p>You've won the auction for <strong>Order #@Model.OrderNumber</strong>!</p>
+            <p>Here are the details of your win:</p>
+
+            <!-- Item Details -->
+            @foreach (var item in Model.Lots)
+            {
+                <div class="item-details">
+                    <img src="@item.ImageUrl" alt="Image of @item.Name" />
+                    <div>
+                        <h2>@item.Name</h2>
+                        <p><strong>Last Bid: @item.HighestBid $</strong></p>
+                    </div>
+                </div>
+            }
+
+            <p><strong>Total Price: @Model.TotalPrice $</strong></p>
+            <p>To complete your purchase, please click the button below:</p>
+            <div class="mt-2">
+                <a href="https://example.com/complete-purchase?orderId=@Model.OrderNumber" class="button">Complete Purchase</a>
+            </div>
+        </div>
+        <div class="footer">
+            <p>Thank you for participating in our auction!</p>
+            <p>If you have any questions, feel free to contact us.</p>
+        </div>
+    </div>
+</body>
+</html>

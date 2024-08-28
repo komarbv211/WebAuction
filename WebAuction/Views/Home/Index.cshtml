@@ -1,0 +1,19 @@
+﻿@model List<Lot>
+﻿<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+
+    @*@if (DateTime.Now.Second % 2 == 0)
+    {
+        <img width="300" src="https://thumbs.dreamstime.com/b/bidding-icon-auction-261300115.jpg" alt="Coin" />
+    }
+    else
+    {
+        <img width="300" src="https://cdn-icons-png.flaticon.com/512/505/505026.png" alt="Coin" />
+    }*@
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 home-lot-list">
+        @foreach (var i in Model)
+        {
+            <partial name="_LotHomeCardPartial" model="@i" />
+        }
+    </div>
+</div>

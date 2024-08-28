@@ -1,0 +1,97 @@
+﻿@model LotDto
+
+<div class="container">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid rounded-start" style="max-height: 400px; object-fit: cover;">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h2 class="card-title">@Model.Name</h2>
+                            <table class="table table-striped table-hover">
+                                <tbody>
+                                    <tr>
+                                        <td>Current Price:</td>
+                                        <td>@Model.HighestBid.ToString("C")</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Start Price:</td>
+                                        <td>@Model.StartPrice.ToString("C")</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Minimum Bid Increment:</td>
+                                        <td>
+                                            @(Model.MinBidIncrement.HasValue && Model.MinBidIncrement.Value > 0 ? "YES" : "NO")
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Rate Step:</td>
+                                        <td>@Model.RateStep</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Quantity:</td>
+                                        <td>@Model.Quantity</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Category:</td>
+                                        <td>@Model.CategoryName</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bids Count:</td>
+                                        <td>@Model.BidCount</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Auction Status:</td>
+                                        <td>@(Model.IsAuctionActive ? "Active" : "Inactive")</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            @if (Model.IsAuctionActive)
+                            {
+                                <form asp-controller="Lots" asp-action="PlaceBid" method="post">
+                                    <input type="hidden" name="LotId" value="@Model.Id" />
+                                    <div class="form-group">
+                                        <label for="bidAmount">Your Bid:</label>
+                                        <input type="number" class="form-control" id="bidAmount" name="bidAmount" min="@Model.MinBidIncrement ?? Model.StartPrice" step="@Model.MinBidIncrement ?? Model.RateStep" required />
+                                    </div>
+                                    <div class="mt-2">
+                                        <button type="submit" class="btn btn-success btn-block">Place Bid</button>
+                                    </div>
+                                </form>
+                            }
+                            else
+                            {
+                                <div class="alert alert-info">
+                                    This auction is currently not active.
+                                </div>
+                            }
+                            <a asp-controller="Favorite" asp-action="Add" asp-route-id="@Model.Id" asp-route-returnUrl="@Context.Request.Path" class="btn btn-primary btn-block mt-3">Add to Favorite</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-footer">
+                    <h3>Description</h3>
+                    <p>@Model.Description</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

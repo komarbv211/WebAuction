@@ -1,0 +1,97 @@
+﻿@model LotDto
+@{
+    var create = ViewBag.CreateMode;
+}
+<h1>@(create ? "Create" : "Edit") Lot Form</h1>
+@if (!create)
+{
+    <div class="text-center">
+        <img height="150" class="rounded-2" src="@Model?.ImageUrl" />
+    </div>
+}
+<form class="row g-3" method="post" enctype="multipart/form-data" asp-action="@(create ? "Create" : "Edit")">
+    <div class="col-12">
+        <label asp-for="Name" class="form-label">Name</label>
+        <input asp-for="Name" required type="text" class="form-control" placeholder="Enter lot name">
+        <span class="small text-danger" asp-validation-for="Name"></span>
+    </div>
+    <div class="col-12">
+        <label asp-for=CategoryId class="form-label">Category</label>
+        <select asp-for=CategoryId asp-items=@ViewBag.Categories class="form-select">
+            <option disabled selected>Choose lot category...</option>
+        </select>
+        <span class="small text-danger" asp-validation-for="CategoryId"></span>
+    </div>
+    <div class="col-12 mb-3">
+        <label asp-for="Description" class="form-label">Description</label>
+        <textarea asp-for="Description" maxlength="10000" placeholder="Enter lot description" class="form-control" rows="3"></textarea>
+        <span class="small text-danger" asp-validation-for="Description"></span>
+    </div>
+    <div class="col-md-2">
+        <label asp-for="Quantity" class="form-label">Quantity</label>
+        <input asp-for="Quantity" min="0" type="number" class="form-control" placeholder="Enter quantity">
+        <span class="small text-danger" asp-validation-for="Quantity"></span>
+
+    </div>
+    <div class="col-md-2">
+        <label asp-for="StartPrice" class="form-label">Start Price</label>
+        <div class="input-group">
+            <input asp-for="StartPrice" min="0" step="0.01" type="number" class="form-control" placeholder="Enter start price">
+            <span class="input-group-text">$</span>
+        </div>
+        <span class="small text-danger" asp-validation-for="StartPrice"></span>
+
+    </div>
+    <div class="col-md-2">
+        <label asp-for="RateStep" class="form-label">Rate Step</label>
+        <input asp-for="RateStep" min="1" type="number" class="form-control" placeholder="Enter rate step">
+        <span class="small text-danger" asp-validation-for="RateStep"></span>
+
+    </div>
+    <div class="col-md-2">
+        <label asp-for="SellerMinPrice" class="form-label">Seller Minimum Price</label>
+        <div class="input-group">
+            <input asp-for="SellerMinPrice" min="0" step="0.01" type="number" class="form-control" placeholder="Enter seller minimum price">
+            <span class="input-group-text">$</span>
+        </div>
+        <span class="small text-danger" asp-validation-for="SellerMinPrice"></span>
+
+    </div>
+    <div class="col-md-2">
+        <label asp-for="MinBidIncrement" class="form-label">Minimum Bid Increment</label>
+        <div class="input-group">
+            <input asp-for="MinBidIncrement" min="0" step="0.01" type="number" class="form-control" placeholder="Enter minimum bid increment">
+            <span class="input-group-text">$</span>
+        </div>
+        <span class="small text-danger" asp-validation-for="MinBidIncrement"></span>
+
+    </div>
+    <div class="col-md-2">
+        <label asp-for="StartOfBidding" class="form-label">Start Of bidding</label>
+        <input asp-for="StartOfBidding" type="datetime-local" class="form-control">
+        <span class="small text-danger" asp-validation-for="StartOfBidding"></span>
+
+    </div>
+    <input hidden asp-for=ImageUrl />
+
+    <div class="col-12">
+        <label asp-for=Image class="form-label">Image</label>
+        <input asp-for=Image class="form-control" type="file" id="formFile">
+        <span class="small text-danger" asp-validation-for="Image"></span>
+    </div>
+    <div class="col-md-6">
+        <a asp-action="Index" class="btn btn-dark w-100">
+            <i class="bi bi-arrow-left"></i>
+            Back
+        </a>
+    </div>
+    <div class="col-md-6">
+        <button type="submit" class="btn btn-success w-100">
+            <i class="bi bi-plus-lg"></i>
+            @(create ? "Create" : "Edit")
+        </button>
+    </div>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
