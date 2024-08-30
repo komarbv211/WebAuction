@@ -19,7 +19,7 @@
                     <td>@order.FinalPrice</td>
                     <td>@order.DateWon.ToShortDateString()</td>
                     <td>
-                        <a asp-controller="Orders" asp-action="RestoreItem" asp-route-id="@order.Id" class="btn btn-info">
+                        <a asp-controller="Lots" asp-action="Details" asp-route-id="@order.Id" class="btn btn-info">
                             View
                         </a>
                         <a asp-controller="Orders" asp-action="RestoreItem" asp-route-id="@order.Id" class="btn btn-success">

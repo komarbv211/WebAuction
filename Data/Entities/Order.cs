@@ -24,5 +24,7 @@ namespace Data.Entities
         public int FinalPrice { get; set; }
 
         public DateTime DateWon { get; set; }
+
+        public bool IsNotificationSent { get; set; }
     }
 }

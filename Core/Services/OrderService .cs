@@ -55,49 +55,77 @@ namespace Core.Services
         }
         public async Task CreateOrdersAtEndOfDay()
         {
-            var lots = await _context.Lots
-                .Where(l => l.StartOfBidding.Date == DateTime.Today && l.HighestBid > 0)
-                .ToListAsync();
-
+            var lots = await GetLotsToProcess();
             foreach (var lot in lots)
             {
-                var highestBidder = _context.Bids
-                    .Where(b => b.LotId == lot.Id)
-                    .OrderByDescending(b => b.Amount)
-                    .Select(b => b.BidderId)
-                    .FirstOrDefault();
-
-                var order = new Order
+                var order = await CreateOrderForLot(lot);
+                if (order != null)
                 {
-                    LotId = lot.Id,
-                    UserId = highestBidder,
-                    FinalPrice = lot.HighestBid,
-                    DateWon = DateTime.Now
-                };
+                    await SendOrderEmail(order);
+                }
+            }
+        }
 
-                _context.Orders.Add(order);
+        private async Task<List<Lot>> GetLotsToProcess()
+        {
+            return await _context.Lots
+                .Where(l => l.StartOfBidding.Date == DateTime.Today && l.HighestBid > 0)
+                .ToListAsync();
+        }
 
-                var winner = _context.Users.Find(order.UserId);
-                var lotDetails = _context.Lots.Where(l => l.Id == lot.Id).Select(l => new LotDto
+        private async Task<Order> CreateOrderForLot(Lot lot)
+        {
+            var highestBidder = _context.Bids
+                .Where(b => b.LotId == lot.Id)
+                .OrderByDescending(b => b.Amount)
+                .Select(b => b.BidderId)
+                .FirstOrDefault();
+
+            if (highestBidder == null)
+                return null;
+
+            var existingOrder = await _context.Orders
+                .AnyAsync(o => o.LotId == lot.Id && o.UserId == highestBidder);
+
+            if (existingOrder)
+                return null;
+
+            var order = new Order
+            {
+                LotId = lot.Id,
+                UserId = highestBidder,
+                FinalPrice = lot.HighestBid,
+                DateWon = DateTime.Now
+            };
+
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
+
+            return order;
+        }
+
+        private async Task SendOrderEmail(Order order)
+        {
+            var winner = _context.Users.Find(order.UserId);
+            var lotDetails = _context.Lots
+                .Where(l => l.Id == order.LotId)
+                .Select(l => new LotDto
                 {
                     Name = l.Name,
                     HighestBid = l.HighestBid
                 }).ToList();
 
-                var emailModel = new OrderSummaryModel
-                {
-                    UserName = winner?.UserName ?? "Шановний користувачу",
-                    OrderNumber = order.Id,
-                    TotalPrice = order.FinalPrice,
-                    Lots = lotDetails
-                };
+            var emailModel = new OrderSummaryModel
+            {
+                UserName = winner?.UserName ?? "Шановний користувачу",
+                OrderNumber = order.Id,
+                TotalPrice = order.FinalPrice,
+                Lots = lotDetails
+            };
 
-                var emailBody = _viewRender.Render("OrderSummary", emailModel);
-
-                await _emailSender.SendEmailAsync(winner?.Email ?? "unknown@example.com", "Вітаємо з виграшем!", emailBody);
-            }
-
-            await _context.SaveChangesAsync();
+            var emailBody = _viewRender.Render("OrderSummary", emailModel);
+            await _emailSender.SendEmailAsync(winner?.Email ?? "unknown@example.com", "Вітаємо з виграшем!", emailBody);
         }
+
     }
 }

@@ -4,25 +4,22 @@ using System.Diagnostics;
 using Data.Data;
 using WebAuction.Models;
 using AutoMapper;
+using Core.Interfaces;
 
 namespace WebAuction.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly AuctionDbContext context;
-        private readonly IMapper mapper;
+        private readonly ILotService _lotService;
 
-        public HomeController(AuctionDbContext context, IMapper mapper)
+        public HomeController(ILotService lotService)
         {
-            this.context = context;
-            this.mapper = mapper;
+            _lotService = lotService;
         }
 
         public IActionResult Index()
         {
-            var lots = context.Lots
-                .Include(x => x.Category)
-                .ToList();
+            var lots = _lotService.GetActiveLots();
             return View(lots);
         }
 

@@ -1,13 +1,16 @@
-﻿@model Lot
+﻿@model LotDto
 <div class="col">
-    <div class="card h-100">
-        <img height="130" src="@Model.ImageUrl" class="card-img-top" alt="@Model.Name">
+    <div class="card h-100" >
+        <a asp-controller="Lots" asp-action="Details" asp-route-id="@Model.Id">
+  
+            <img height="130" src="@Model.ImageUrl" class="card-img-top" alt="@Model.Name" >
+        </a>
         <div class="card-body">
             <h5 class="card-title">
                 <a asp-controller="Lots" asp-action="Details" asp-route-id="@Model.Id">@Model.Name</a>
             </h5>
             <p class="card-text">
-                @Model.Category?.Name<br />
+                @Model.CategoryName<br />
                 Left: @Model.Quantity
             </p>
             <a asp-controller="Favorite" asp-action="Add" asp-route-id="@Model.Id" asp-route-returnUrl="@Context.Request.Path" class="btn btn-primary">Add to Favorite</a>
@@ -15,6 +18,12 @@
         <div class="card-footer">
             <small class="text-muted">
                 Start Price: <span class="badge bg-secondary">@Model.StartPrice</span>
+            </small>
+            <br />
+            <small class="text-muted">
+                Auction Status: <span class="badge @(Model.IsAuctionActive ? "bg-success" : "bg-danger")">
+                    @(Model.IsAuctionActive ? "Active" : "Inactive")
+                </span>
             </small>
         </div>
     </div>
