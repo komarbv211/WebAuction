@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Dtos;
 using Core.Interfaces;
 using Data.Data;
 using Data.Entities;
@@ -20,6 +21,15 @@ namespace Core.Services
         {
             _context = context;
             _mapper = mapper;
+        }
+        public async Task<BidDto?> GetUserBidForLotAsync(int lotId, string userId)
+        {
+            var bid = await _context.Bids
+                .Where(b => b.LotId == lotId && b.BidderId == userId)
+                .OrderByDescending(b => b.BidTime)
+                .FirstOrDefaultAsync();
+
+            return bid != null ? _mapper.Map<BidDto>(bid) : null;
         }
         public async Task<bool> PlaceBid(int lotId, int amount, string userId)
         {
@@ -59,7 +69,7 @@ namespace Core.Services
                     BidderId = userId
                 };
 
-                _context.Bids.Add(bid);
+                await _context.Bids.AddAsync(bid);
             }
 
             return true;

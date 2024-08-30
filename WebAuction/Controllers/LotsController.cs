@@ -73,12 +73,14 @@ namespace WebAuction.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
             var lot = _lotService.GetLotById(id);
-
             if (lot == null) return NotFound();
 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var bid = userId != null ? await _bidService.GetUserBidForLotAsync(id, userId) : null;
+            lot.MyRate = bid?.Amount ?? 0;
             return View(lot);
         }
         

@@ -68,7 +68,7 @@
                                 <form asp-controller="Lots" asp-action="PlaceBid" method="post">
                                     <input type="hidden" name="LotId" value="@Model.Id" />
                                     <div class="form-group">
-                                        <label for="bidAmount">Your Bid:</label>
+                                        <label for="bidAmount">Your Bid: @Model.MyRate</label>
                                         <input type="number" class="form-control" id="bidAmount" name="bidAmount" min="@Model.MinBidIncrement ?? Model.StartPrice" step="@Model.MinBidIncrement ?? Model.RateStep" required />
                                     </div>
                                     <div class="mt-2">

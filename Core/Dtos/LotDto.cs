@@ -15,6 +15,8 @@ namespace Core.Dtos
         public bool Archived { get; set; }
         public decimal LastRate { get; set; }
         public int RateStep { get; set; }
+        public int? MyRate { get; set; }
+
         public decimal StartPrice { get; set; }
         public DateTime StartOfBidding { get; set; }
         public int BidCount { get; set; }

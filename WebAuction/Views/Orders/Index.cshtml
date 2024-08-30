@@ -8,7 +8,7 @@
                 <th>Lot</th>
                 <th>Final Price</th>
                 <th>Date Created</th>
-                <th>Actions</th>
+                <th class="text-center">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -18,11 +18,15 @@
                     <td>@order.LotId</td>
                     <td>@order.FinalPrice</td>
                     <td>@order.DateWon.ToShortDateString()</td>
-                    <td>
+                    <td class="text-center">
                         <a asp-controller="Lots" asp-action="Details" asp-route-id="@order.Id" class="btn btn-info">
                             View
                         </a>
-                        <a asp-controller="Orders" asp-action="RestoreItem" asp-route-id="@order.Id" class="btn btn-success">
+                        <a asp-controller="Payment" asp-action="Pay"
+                           asp-route-lotId="@order.LotId"
+                           asp-route-lotName="@order.LotName"
+                           asp-route-amount="@order.FinalPrice"
+                           class="btn btn-success">
                             Pay Now
                         </a>
                     </td>

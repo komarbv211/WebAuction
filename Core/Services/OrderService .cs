@@ -4,15 +4,9 @@ using Core.Interfaces;
 using Core.Models;
 using Data.Data;
 using Data.Entities;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Services
 {
@@ -69,12 +63,15 @@ namespace Core.Services
         private async Task<List<Lot>> GetLotsToProcess()
         {
             return await _context.Lots
-                .Where(l => l.StartOfBidding.Date == DateTime.Today && l.HighestBid > 0)
+                .Where(l => l.StartOfBidding.Date <= DateTime.Today && l.StartOfBidding.Date.AddDays(1) <= DateTime.Now && l.HighestBid > 0)
                 .ToListAsync();
         }
 
         private async Task<Order> CreateOrderForLot(Lot lot)
         {
+            if (lot.StartOfBidding.Date.AddDays(1) > DateTime.Now)
+                return null;
+
             var highestBidder = _context.Bids
                 .Where(b => b.LotId == lot.Id)
                 .OrderByDescending(b => b.Amount)

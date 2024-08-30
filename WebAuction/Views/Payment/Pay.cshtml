@@ -1,0 +1,33 @@
+﻿@model Core.Dtos.PaymentDto
+
+<div class="container">
+    <h2>Оплата лоту @Model.LotName</h2>
+    <h4>Сума до оплати: @Model.Amount.ToString("C")</h4>
+
+    <form asp-action="Pay" method="post">
+        <div class="form-group">
+            <label for="CardHolderName">Ім'я власника картки</label>
+            <input type="text" class="form-control" id="CardHolderName" name="CardHolderName" value="@Model.CardHolderName" required />
+        </div>
+
+        <div class="form-group">
+            <label for="CreditCardNumber">Номер картки</label>
+            <input type="text" class="form-control" id="CreditCardNumber" name="CreditCardNumber" value="@Model.CreditCardNumber" required />
+        </div>
+
+        <div class="form-group">
+            <label for="ExpiryDate">Дата закінчення дії (MM/YY)</label>
+            <input type="text" class="form-control" id="ExpiryDate" name="ExpiryDate" value="@Model.ExpiryDate" required />
+        </div>
+
+        <div class="form-group">
+            <label for="CVC">CVC</label>
+            <input type="text" class="form-control" id="CVC" name="CVC" value="@Model.CVC" required />
+        </div>
+
+        <input type="hidden" name="LotId" value="@Model.LotId" />
+        <input type="hidden" name="Amount" value="@Model.Amount" />
+
+        <button type="submit" class="btn btn-primary mt-3">Оплатити</button>
+    </form>
+</div>

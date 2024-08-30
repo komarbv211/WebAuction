@@ -99,15 +99,14 @@
             <h1>Congratulations, @Model.UserName!</h1>
         </div>
         <div class="content">
-            <div class="tekst-crnter"
+            <div class="text-center"
             <p>You've won the auction for <strong>Order #@Model.OrderNumber</strong>!</p>
             <p>Here are the details of your win:</p>
 
             <!-- Item Details -->
             @foreach (var item in Model.Lots)
             {
-                <div class="item-details">
-                    <img src="https://localhost:7290/"@item.ImageUrl"" alt="Image of @item.Name" />
+                <div class="item-details text-center">
                     <div>
                         <h2>@item.Name</h2>
                         <p><strong>Last Bid: @item.HighestBid $</strong></p>
@@ -118,8 +117,8 @@
             <p><strong>Total Price: @Model.TotalPrice $</strong></p>
             <p>To complete your purchase, please click the button below:</p>
             <div class="mt-2">
-                <a href="https://example.com/complete-purchase?orderId=@Model.OrderNumber" class="button">Complete Purchase</a>
-            </div>
+        <a href="https://localhost:7290/Payment/Pay?lotId=@Model.Lots.FirstOrDefault()" class="button">Complete Purchase</a>            
+        </div>
         </div>
         <div class="footer">
             <p>Thank you for participating in our auction!</p>

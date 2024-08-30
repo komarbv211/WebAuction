@@ -10,6 +10,7 @@ namespace Core.Dtos
     {
         public int Id { get; set; }
         public int LotId { get; set; }
+        public string? LotName { get; set; }
         public string? UserId { get; set; }
         public int FinalPrice { get; set; }
         public DateTime DateWon { get; set; }

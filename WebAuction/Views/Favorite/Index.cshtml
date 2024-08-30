@@ -15,13 +15,32 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <img class="ms-2" height="48" src="@i.ImageUrl" alt="@i.Name" />
                     <div class="ms-2 me-auto">
-                        <div class="fw-bold text-start">@i.Name</div>
+                        <div class="fw-bold text-center">@i.Name</div>
                         @i.CategoryName | Stock: @i.Quantity
+                            <div class="text-muted">
+                                Auction Status:
+                                @if (i.StartOfBidding > DateTime.Now)
+                                {
+                                    <span class="badge bg-warning">Waiting</span>
+                                }
+                                else
+                                {
+                                    <span class="badge @(i.IsAuctionActive ? "bg-success" : "bg-danger")">
+                                        @(i.IsAuctionActive ? "Active" : "Сompleted")
+                                    </span>
+                                }
+                            </div>
                     </div>
-                    <span style="background-color: #0d6efd" class="badge text-bg-primary">@i.StartPrice$</span>
-                    <a asp-action="Remove" asp-route-id="@i.Id" class="btn text-danger">
-                        <i class="bi bi-trash3"></i>
-                    </a>
+                    <div class="me-3">
+                            <span style="background-color: #0d6efd" class="badge text-bg-primary">@i.StartPrice$</span>
+                    </div>
+                    <div class="d-flex">
+                            <a asp-controller="Lots" asp-action="Details" asp-route-id="@i.Id" class="btn btn-success me-2">
+                            Place Bid</a>
+                        <a asp-action="Remove" asp-route-id="@i.Id" class="btn text-danger">
+                            <i class="bi bi-trash3"></i>
+                        </a>
+                    </div>
                 </li>
             }
             </ol>
@@ -31,14 +50,10 @@
             <p class="mt-4">Looks like your list is empty</p>
             <div>
                 <a asp-controller="Home" class="btn btn-primary mt-3">
-                    Browse Our Store
+                    View the list of lots
                 </a>
             </div>
         }
-
-        <a asp-controller="Orders" asp-action="Create" class="btn btn-success mt-3">Confirm</a>
     </div>
-    <div class="card-footer text-body-secondary">
-        Total: @Model.Sum(x => x.StartPrice)$
     </div>
 </div>

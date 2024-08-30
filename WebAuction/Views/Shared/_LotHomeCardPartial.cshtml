@@ -21,9 +21,17 @@
             </small>
             <br />
             <small class="text-muted">
-                Auction Status: <span class="badge @(Model.IsAuctionActive ? "bg-success" : "bg-danger")">
-                    @(Model.IsAuctionActive ? "Active" : "Inactive")
-                </span>
+                Auction Status:
+                @if (Model.StartOfBidding > DateTime.Now)
+                {
+                    <span class="badge bg-warning">Waiting</span>
+                }
+                else
+                {
+                    <span class="badge @(Model.IsAuctionActive ? "bg-success" : "bg-danger")">
+                        @(Model.IsAuctionActive ? "Active" : "Сompleted")
+                    </span>
+                }
             </small>
         </div>
     </div>
